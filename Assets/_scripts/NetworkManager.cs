@@ -6,9 +6,15 @@ public class NetworkManager : MonoBehaviour {
 
     private string baseUrl = "https://safe-spire-50798.herokuapp.com/";
 
+    private string player = "players";
     public void onClickButtonConnection()
     {
         WWW result = GET(baseUrl);
+    }
+
+    public void onClickButtonGetPlayer()
+    {
+        WWW result = GET(baseUrl+player);
     }
 
 
