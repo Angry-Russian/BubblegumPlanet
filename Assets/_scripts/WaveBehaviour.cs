@@ -22,12 +22,13 @@ public class WaveBehaviour : MonoBehaviour {
     public float k = 0.04f;
     [Range(0.00005f, 0.5f)]
     public float friction = 0.1f;
-    [Range(1, 6)]
-    public int propagation = 3;
     [Range(0.01f, 0.5f)]
     public float amplitude = 0.25f;
     [Range(0.01f, 4 * Mathf.PI)]
     public float frequency = 2 * Mathf.PI;
+    [Range(0.01f, 6)]
+    public float affection = 1f;
+
 
     void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
@@ -66,14 +67,14 @@ public class WaveBehaviour : MonoBehaviour {
         }
 
 
-        wobbleVertices[0] = (radius + 2) * wobbleVertexAxes[0];
+        wobbleVertices[0] = radius * wobbleVertexAxes[0];
     }
 
 	// Update is called once per frame
 	void FixedUpdate () {
-        r = radius / 0.6f;
+        r = radius;
 
-        wobbleVertices[0] = (Mathf.Cos(Time.realtimeSinceStartup * frequency) * radius * amplitude + radius) * wobbleVertexAxes[0];
+        wobbleVertices[0] = (Mathf.Cos(Time.realtimeSinceStartup * frequency) * r * amplitude + r) * wobbleVertexAxes[0];
 
 
         for (var i = 1; i < n; i++) {
@@ -85,8 +86,8 @@ public class WaveBehaviour : MonoBehaviour {
             int n = adjascents.Count;
             foreach(var j in adjascents) {
                 Vector3 partialHorizon = wobbleVertices[j] - gravityCenter.position;
-                Vector3 partialForce = k * (partialHorizon.magnitude - r) * wobbleVertexAxes[i];
-                f += partialForce / (n);
+                Vector3 partialForce = k * (partialHorizon.magnitude - horizon.magnitude) * wobbleVertexAxes[i];
+                f += partialForce / (n) * affection;
             }
 
             wobbleVertexAccelerations[i] = f - friction * wobbleVertexSpeeds[i];
