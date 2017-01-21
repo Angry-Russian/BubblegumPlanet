@@ -131,7 +131,7 @@ public class WaveBehaviour : MonoBehaviour {
     /// <param name="vertexIndex">Index recieved from NearestVertexTo</param>
     /// <param name="force">scalar Force to apply to vertex, towards or away from center</param>
     public void ApplyForceToVertex(int vertexIndex, float force) {
-        wobbleVertexAccelerations[vertexIndex] += force * wobbleVertexAxes[vertexIndex];
+        wobbleVertexSpeeds[vertexIndex] += force * wobbleVertexAxes[vertexIndex];
     }
 
     /// <summary>
