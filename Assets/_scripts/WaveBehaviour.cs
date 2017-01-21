@@ -18,9 +18,9 @@ public class WaveBehaviour : MonoBehaviour {
     [Range(1, 20)]
     public float radius = 1;
     private float r; // because the drawn radius isn't the same as the one the vertices converge to, for some reason.
-    [Range(0.005f, 0.75f)]
+    [Range(0.00005f, 0.75f)]
     public float k = 0.04f;
-    [Range(0.005f, 0.5f)]
+    [Range(0.00005f, 0.5f)]
     public float friction = 0.1f;
     [Range(1, 6)]
     public int propagation = 3;
@@ -69,7 +69,7 @@ public class WaveBehaviour : MonoBehaviour {
 	void FixedUpdate () {
         r = radius / 0.6f;
 
-        wobbleVertices[0] = (Mathf.Cos(Time.realtimeSinceStartup*Mathf.PI)*radius*0.75f + radius) * wobbleVertexAxes[0];
+        wobbleVertices[0] = (Mathf.Cos(Time.realtimeSinceStartup*Mathf.PI)*radius*0.125f + radius) * wobbleVertexAxes[0];
 
 
         for (var i = 1; i < n; i++) {
