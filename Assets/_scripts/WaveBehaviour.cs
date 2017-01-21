@@ -24,6 +24,10 @@ public class WaveBehaviour : MonoBehaviour {
     public float friction = 0.1f;
     [Range(1, 6)]
     public int propagation = 3;
+    [Range(0.01f, 0.5f)]
+    public float amplitude = 0.25f;
+    [Range(0.01f, 4 * Mathf.PI)]
+    public float frequency = 2 * Mathf.PI;
 
     void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
@@ -69,7 +73,7 @@ public class WaveBehaviour : MonoBehaviour {
 	void FixedUpdate () {
         r = radius / 0.6f;
 
-        wobbleVertices[0] = (Mathf.Cos(Time.realtimeSinceStartup*Mathf.PI)*radius*0.125f + radius) * wobbleVertexAxes[0];
+        wobbleVertices[0] = (Mathf.Cos(Time.realtimeSinceStartup * frequency) * radius * amplitude + radius) * wobbleVertexAxes[0];
 
 
         for (var i = 1; i < n; i++) {
