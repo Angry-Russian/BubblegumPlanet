@@ -69,7 +69,7 @@ public class WaveBehaviour : MonoBehaviour {
 	void FixedUpdate () {
         r = radius / 0.6f;
 
-        wobbleVertices[0] = (Mathf.Cos(Time.realtimeSinceStartup*Mathf.PI*2)*0.2f + radius) * wobbleVertexAxes[0];
+        wobbleVertices[0] = (Mathf.Cos(Time.realtimeSinceStartup*Mathf.PI)*radius*0.75f + radius) * wobbleVertexAxes[0];
 
 
         for (var i = 1; i < n; i++) {
