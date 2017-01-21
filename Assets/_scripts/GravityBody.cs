@@ -11,6 +11,8 @@ public class GravityBody : MonoBehaviour {
     private Transform myTransform;
 
     [SerializeField]
+    string m_prefixPlayer = "P1_";
+    [SerializeField]
     float m_MovingTurnSpeed = 360;
     [SerializeField]
     float m_StationaryTurnSpeed = 180;
@@ -46,7 +48,7 @@ public class GravityBody : MonoBehaviour {
     private Vector3 m_Move;
     private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
     private Vector3 gravityUp;
-
+    private bool m_isEjected = false;
     // Use this for initialization
     void Start () {
         // get the transform of the main camera
@@ -75,12 +77,13 @@ public class GravityBody : MonoBehaviour {
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         m_OrigGroundCheckDistance = m_GroundCheckDistance;
     }
-	
+	public 
 	// Update is called once per frame
 	void FixedUpdate() {
-        gravityUp = gravityAttraction.Attract(myTransform);
+        if(!m_isEjected)
+            gravityUp = gravityAttraction.Attract(myTransform);
 
-        m_Jump = Input.GetButtonDown("Jump");
+        m_Jump = Input.GetButtonDown(m_prefixPlayer+"Jump");
         Debug.Log("is "+m_IsGrounded);
         Debug.Log("jumo " + m_Jump);
         if (m_IsGrounded && m_Jump)
@@ -90,8 +93,8 @@ public class GravityBody : MonoBehaviour {
             m_Jump = false;
         }
 
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
+        float h = Input.GetAxisRaw(m_prefixPlayer+"Horizontal");
+        float v = Input.GetAxisRaw(m_prefixPlayer+"Vertical");
         
         Vector3 movement = new Vector3(h, 0.0f, v).normalized;
 
@@ -137,7 +140,11 @@ public class GravityBody : MonoBehaviour {
     void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.tag == "planet")
+        {
+            GameObject.FindGameObjectWithTag("planet").GetComponent<WaveBehaviour>().NearestVertexTo(transform.position);
             m_IsGrounded = true;
+        }
+            
     }
     void OnCollisionExit(Collision other)
     {
