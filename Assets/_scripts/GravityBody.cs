@@ -11,6 +11,8 @@ public class GravityBody : MonoBehaviour {
     private Transform myTransform;
 
     [SerializeField]
+    string m_prefixPlayer = "P1_";
+    [SerializeField]
     float m_MovingTurnSpeed = 360;
     [SerializeField]
     float m_StationaryTurnSpeed = 180;
@@ -81,7 +83,7 @@ public class GravityBody : MonoBehaviour {
         if(!m_isEjected)
             gravityUp = gravityAttraction.Attract(myTransform);
 
-        m_Jump = Input.GetButtonDown("Jump");
+        m_Jump = Input.GetButtonDown(m_prefixPlayer+"Jump");
         Debug.Log("is "+m_IsGrounded);
         Debug.Log("jumo " + m_Jump);
         if (m_IsGrounded && m_Jump)
@@ -91,8 +93,8 @@ public class GravityBody : MonoBehaviour {
             m_Jump = false;
         }
 
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
+        float h = Input.GetAxisRaw(m_prefixPlayer+"Horizontal");
+        float v = Input.GetAxisRaw(m_prefixPlayer+"Vertical");
         
         Vector3 movement = new Vector3(h, 0.0f, v).normalized;
 
