@@ -97,26 +97,39 @@ public class WaveBehaviour : MonoBehaviour {
         wobbleMesh.vertices = wobbleVertices;
     }
 
-    public Vector3 NearestVertexTo(Vector3 point) {
+    /// <summary>
+    /// Retruns ID of nearest vertex, to use with ApplyForceToVertex
+    /// </summary>
+    /// <param name="point">coordinates in 3d space</param>
+    /// <returns>int ID of vertex</returns>
+    public int NearestVertexTo(Vector3 point) {
         // referenced code : http://answers.unity3d.com/questions/7788/closest-point-on-mesh-collider.html
         // convert point to local space
         point = transform.InverseTransformPoint(point);
 
-
-        Mesh mesh = GetComponent<MeshFilter>().mesh;
         float minDistanceSqr = Mathf.Infinity;
-        Vector3 nearestVertex = Vector3.zero;
+        int nearestVertex = -1;
         // scan all vertices to find nearest
-        foreach (Vector3 vertex in mesh.vertices) {
+        for(var i = 0; i < wobbleMesh.vertexCount; i++) {
+            Vector3 vertex = wobbleMesh.vertices[i];
             Vector3 diff = point - vertex;
             float distSqr = diff.sqrMagnitude;
             if (distSqr < minDistanceSqr){
                 minDistanceSqr = distSqr;
-                nearestVertex = vertex;
+                nearestVertex = i;
             }
         }
         // convert nearest vertex back to world space
-        return transform.TransformPoint(nearestVertex);
+        return nearestVertex;
 
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="vertexIndex">Index recieved from NearestVertexTo</param>
+    /// <param name="force">scalar Force to apply to vertex, towards or away from center</param>
+    public void ApplyForceToVertex(int vertexIndex, float force) {
+        wobbleVertexAccelerations[vertexIndex] += force * wobbleVertexAxes[vertexIndex];
     }
 }
