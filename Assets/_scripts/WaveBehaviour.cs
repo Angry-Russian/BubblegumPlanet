@@ -29,6 +29,7 @@ public class WaveBehaviour : MonoBehaviour {
     [Range(0.01f, 6)]
     public float affection = 1f;
 
+    public float frictionImpact = 0.01f;
 
     void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
@@ -69,9 +70,9 @@ public class WaveBehaviour : MonoBehaviour {
 
         wobbleVertices[0] = radius * wobbleVertexAxes[0];
     }
-
-	// Update is called once per frame
-	void FixedUpdate () {
+    
+    // Update is called once per frame
+    void FixedUpdate () {
         r = radius;
 
         wobbleVertices[0] = (Mathf.Cos(Time.realtimeSinceStartup * frequency) * r * amplitude + r) * wobbleVertexAxes[0];
@@ -97,7 +98,13 @@ public class WaveBehaviour : MonoBehaviour {
 
         wobbleMesh.vertices = wobbleVertices;
     }
+    public void addShockWave(Vector3 positionImpact)
+    {
+        if (friction > 0.2)
+            friction = frictionImpact;
 
+        ApplyForceToVertex(NearestVertexTo(positionImpact), -1.0f);
+    }
     /// <summary>
     /// Retruns ID of nearest vertex, to use with ApplyForceToVertex
     /// </summary>

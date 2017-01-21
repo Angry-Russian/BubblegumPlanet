@@ -49,6 +49,7 @@ public class GravityBody : MonoBehaviour {
     private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
     private Vector3 gravityUp;
     private bool m_isEjected = false;
+    private bool canMakeImpact = false;
     // Use this for initialization
     void Start () {
         // get the transform of the main camera
@@ -89,6 +90,7 @@ public class GravityBody : MonoBehaviour {
         if (m_IsGrounded && m_Jump)
         {
             rb.AddForce(gravityUp * m_JumpPower * 30);
+            canMakeImpact = true;
             m_IsGrounded = false;
             m_Jump = false;
         }
@@ -141,14 +143,25 @@ public class GravityBody : MonoBehaviour {
     {
         if(other.gameObject.tag == "planet")
         {
-            GameObject.FindGameObjectWithTag("planet").GetComponent<WaveBehaviour>().NearestVertexTo(transform.position);
+            Debug.Log("mmmmmm");
+            if (canMakeImpact)
+            {
+                Debug.Log("Mouhahaha");
+                canMakeImpact = false;
+                GameObject.FindGameObjectWithTag("planet").GetComponent<WaveBehaviour>().addShockWave(transform.position);
+            } 
             m_IsGrounded = true;
-        }
-            
+        }   
     }
     void OnCollisionExit(Collision other)
     {
+        print("No longer in contact with " + other.transform.name);
         if (other.gameObject.tag == "planet")
+        {
+            Debug.Log("Ohohoh");
             m_IsGrounded = false;
+            canMakeImpact = true;
+        }
+            
     }
 }

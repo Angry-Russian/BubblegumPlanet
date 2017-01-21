@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23203426298674612}
   - component: {fileID: 114493232875173994}
   - component: {fileID: 64703629419285892}
+  - component: {fileID: 114844427931544164}
   m_Layer: 0
   m_Name: default
   m_TagString: Untagged
@@ -79,7 +80,7 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1254619379758238}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -109,7 +110,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1254619379758238}
-  m_Mesh: {fileID: 4300000, guid: c13e1e95d27f5cf4da8c27a8988ab11a, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!64 &64703629419285892
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -123,7 +124,7 @@ MeshCollider:
   m_Convex: 0
   m_InflateMesh: 0
   m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: c13e1e95d27f5cf4da8c27a8988ab11a, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!114 &114493232875173994
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,9 +137,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityCenter: {fileID: 0}
-  radius: 1
+  radius: 10
   k: 0.015
-  friction: 0.014
-  amplitude: 0.25
+  friction: 0.023
+  amplitude: 0.01
   frequency: 8.1
   affection: 2.3
+--- !u!114 &114844427931544164
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1254619379758238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6ab04d556e3db48b3d350b0b559937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravity: -10
+  gravityUp: {x: -0.34994557, y: 0.7770352, z: 0.52321553}
