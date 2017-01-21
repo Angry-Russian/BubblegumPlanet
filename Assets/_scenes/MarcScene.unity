@@ -108,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   gravityAttraction: {fileID: 618022302}
+  m_prefixPlayer: P1_
   m_MovingTurnSpeed: 360
   m_StationaryTurnSpeed: 180
   m_JumpPower: 12
@@ -860,6 +861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   gravityAttraction: {fileID: 618022302}
+  m_prefixPlayer: P2_
   m_MovingTurnSpeed: 360
   m_StationaryTurnSpeed: 180
   m_JumpPower: 12
