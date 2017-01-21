@@ -211,7 +211,7 @@ using Scripts;
 			{
                 if (!m_IsGrounded)
                 {
-                    GameObject.FindGameObjectWithTag("Wave").GetComponent<Wave>().makeWave(GameObject.FindGameObjectWithTag("Player").transform);
+                    //GameObject.FindGameObjectWithTag("Wave").GetComponent<Wave>().makeWave(GameObject.FindGameObjectWithTag("Player").transform);
                 }
 				m_GroundNormal = hitInfo.normal;
 				m_IsGrounded = true;
