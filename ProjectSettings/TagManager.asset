@@ -6,6 +6,7 @@ TagManager:
   tags:
   - powerupManager
   - Wave
+  - planet
   layers:
   - Default
   - TransparentFX

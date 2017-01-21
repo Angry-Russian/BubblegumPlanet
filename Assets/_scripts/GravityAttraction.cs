@@ -6,7 +6,7 @@ public class GravityAttraction : MonoBehaviour {
 
     public float gravity = -10;
     public Vector3 gravityUp;
-    public void Attract(Transform body)
+    public Vector3 Attract(Transform body)
     {
         gravityUp = (body.position - transform.position).normalized;
         Vector3 bodyUp = body.up;
@@ -14,5 +14,6 @@ public class GravityAttraction : MonoBehaviour {
         body.GetComponent<Rigidbody>().AddForce(gravityUp * gravity);
         Quaternion targetRotation = Quaternion.FromToRotation(bodyUp, gravityUp) * body.rotation;
         body.rotation = Quaternion.Slerp(body.rotation, targetRotation, 50 * Time.deltaTime);
+        return gravityUp;
     }
 }
