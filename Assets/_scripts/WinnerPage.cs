@@ -13,6 +13,6 @@ public class WinnerPage : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Input.GetButtonDown("restart"))
-            SceneManager.LoadScene("UI - Marc");
+            SceneManager.LoadScene(0);
 	}
 }

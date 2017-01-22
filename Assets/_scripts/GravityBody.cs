@@ -56,6 +56,7 @@ public class GravityBody : MonoBehaviour {
     private bool canMakeImpact = false;
     private bool isRespawning = false;
     private float jumpCoolDown = 0.0f;
+    public Transform animFinalForm;
 
     public AudioClip soundJump;
     public AudioClip soundImpact;
@@ -95,6 +96,7 @@ public class GravityBody : MonoBehaviour {
         GameObject.Find(m_prefixPlayer + "Text").GetComponent<Text>().text = ": "+deaths;
 
         audioSource = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioSource>();
+
     }
     // Update is called once per frame
     void FixedUpdate() {
@@ -127,25 +129,11 @@ public class GravityBody : MonoBehaviour {
 
             float h = Input.GetAxisRaw(m_prefixPlayer + "Horizontal");
             float v = Input.GetAxisRaw(m_prefixPlayer + "Vertical");
-
+            Debug.Log("h" + h);
+            Debug.Log("v" + v);
             Vector3 movement = new Vector3(h, 0.0f, v).normalized;
 
             rb.MovePosition(rb.position + transform.TransformDirection(movement) * speed * Time.deltaTime);
-
-            GameObject.Find(m_prefixPlayer + "Model").transform.Rotate(0.0f, -Input.GetAxis ("Horizontal") * speed, 0.0f);
-        }
-    }
-
-    void UpdateAnimator(Vector3 move)
-    {
-        // update the animator parameters
-        m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
-        m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
-        m_Animator.SetBool("Crouch", m_Crouching);
-        m_Animator.SetBool("OnGround", m_IsGrounded);
-        if (!m_IsGrounded)
-        {
-            m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
         }
     }
     void OnCollisionEnter(Collision other)

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManagerç : MonoBehaviour {
 
@@ -16,10 +17,13 @@ public class GameManagerç : MonoBehaviour {
     void Update()
     {
         timeLeft -= Time.deltaTime;
-        GetComponent<Text>().text = Mathf.Floor(timeLeft / 60)+":" +Mathf.RoundToInt(timeLeft%60);
         if (timeLeft < 0)
         {
-// StartCoroutine(GameOver());
+            StartCoroutine(GameOver());
+        }
+        else
+        {
+            GetComponent<Text>().text = Mathf.Floor(timeLeft / 60) + ":" + Mathf.RoundToInt(timeLeft % 60);
         }
     }
 
@@ -29,23 +33,24 @@ public class GameManagerç : MonoBehaviour {
         int[] scores = new int[4];
         scores[0] = GameObject.Find("Anim_Bot_01").GetComponent<GravityBody>().deaths;
         scores[1] = GameObject.Find("Anim_Bot_02").GetComponent<GravityBody>().deaths;
-        scores[2] = GameObject.Find("Anim_Bot_03").GetComponent<GravityBody>().deaths;
-        scores[3] = GameObject.Find("Anim_Bot_04").GetComponent<GravityBody>().deaths;
-// Array.Sort(scores);
+        //scores[2] = GameObject.Find("Anim_Bot_03").GetComponent<GravityBody>().deaths;
+        // scores[3] = GameObject.Find("Anim_Bot_04").GetComponent<GravityBody>().deaths;
+        Array.Sort(scores);
         if(scores[3] == scores[2])
         {
-            Application.LoadLevel("Draw");
+            SceneManager.LoadScene("Draw");
         }
         else
         {
-            if(scores[3] == GameObject.Find("Anim_Bot_04").GetComponent<GravityBody>().deaths)
-                Application.LoadLevel("WinnerP4");
+            SceneManager.LoadScene("WinnerP4");
+            if (scores[3] == GameObject.Find("Anim_Bot_04").GetComponent<GravityBody>().deaths)
+                SceneManager.LoadScene("WinnerP4");
             else if (scores[3] == GameObject.Find("Anim_Bot_03").GetComponent<GravityBody>().deaths)
-                Application.LoadLevel("WinnerP3");
+                SceneManager.LoadScene("WinnerP3");
             else if (scores[3] == GameObject.Find("Anim_Bot_02").GetComponent<GravityBody>().deaths)
-                Application.LoadLevel("WinnerP2");
+                SceneManager.LoadScene("WinnerP2");
             else
-                Application.LoadLevel("WinnerP1");
+                SceneManager.LoadScene("WinnerP1");
         }
     }
 }

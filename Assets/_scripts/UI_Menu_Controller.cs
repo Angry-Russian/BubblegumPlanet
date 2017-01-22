@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UI_Menu_Controller : MonoBehaviour {
 
@@ -14,19 +15,24 @@ public class UI_Menu_Controller : MonoBehaviour {
 		
 	}
 
+    public void loadGame()
+    {
+        SceneManager.LoadScene("Dim's little big planets");
+    }
+
     public void loadMenu()
     {
-        Application.LoadLevel("UI-Marc");
+        SceneManager.LoadScene("UI-Marc");
     }
 
     public void loadInstruction()
     {
-        Application.LoadLevel("UI-Instruction-Marc");
+        SceneManager.LoadScene("UI-Instruction-Marc");
     }
 
     public void loadCredits()
     {
-        Application.LoadLevel("UI-Credits-Marc");
+        SceneManager.LoadScene("UI-Credits-Marc");
     }
 
     public void exitApplication()
