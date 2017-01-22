@@ -30,7 +30,8 @@ public class WaveBehaviour : MonoBehaviour {
     public float affection = 1f;
 
     public float initialFriction = 0.01f;
-
+    public AudioClip soundWave;
+    private AudioSource audioSource;
     private bool isFirstTurn = true;
 
     void OnDrawGizmosSelected() {
@@ -71,6 +72,7 @@ public class WaveBehaviour : MonoBehaviour {
 
 
         wobbleVertices[0] = radius * wobbleVertexAxes[0];
+        GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioSource>();
     }
     
     // Update is called once per frame
@@ -106,6 +108,7 @@ public class WaveBehaviour : MonoBehaviour {
     public void addShockWave(Vector3 positionImpact)
     {
         ApplyForceToVertex(NearestVertexTo(positionImpact), -1.0f);
+        
     }
     /// <summary>
     /// Retruns ID of nearest vertex, to use with ApplyForceToVertex
@@ -141,6 +144,7 @@ public class WaveBehaviour : MonoBehaviour {
     /// <param name="force">scalar Force to apply to vertex, towards or away from center</param>
     public void ApplyForceToVertex(int vertexIndex, float force) {
         wobbleVertexSpeeds[vertexIndex] += force * wobbleVertexAxes[vertexIndex];
+        audioSource.PlayOneShot(soundWave);
     }
 
     /// <summary>

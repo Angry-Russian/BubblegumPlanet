@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Scripts;
+using UnityEngine.UI;
 
 public class GravityBody : MonoBehaviour {
 
@@ -54,6 +55,11 @@ public class GravityBody : MonoBehaviour {
     private bool m_isEjected = false;
     private bool canMakeImpact = false;
     private bool isRespawning = false;
+
+    public AudioClip soundJump;
+    public AudioClip soundImpact;
+    public AudioClip soundDead;
+    private AudioSource audioSource;
     // Use this for initialization
     void Start () {
         // get the transform of the main camera
@@ -84,6 +90,10 @@ public class GravityBody : MonoBehaviour {
 
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         m_OrigGroundCheckDistance = m_GroundCheckDistance;
+
+        GameObject.Find(m_prefixPlayer + "Text").GetComponent<Text>().text = ": "+deaths;
+
+        audioSource = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioSource>();
     }
     // Update is called once per frame
     void FixedUpdate() {
@@ -92,7 +102,6 @@ public class GravityBody : MonoBehaviour {
             m_isEjected = true;
             rb.useGravity = true;
             isRespawning = true;
-            Debug.Log("fsdfsddfsf");
             StartCoroutine(respawnPlayer());
         }
 
@@ -103,6 +112,7 @@ public class GravityBody : MonoBehaviour {
 
             if (m_IsGrounded && m_Jump)
             {
+                audioSource.PlayOneShot(soundJump);
                 rb.AddForce(gravityUp * m_JumpPower * 30);
                 canMakeImpact = true;
                 m_IsGrounded = false;
@@ -116,6 +126,8 @@ public class GravityBody : MonoBehaviour {
             Vector3 movement = new Vector3(h, 0.0f, v).normalized;
 
             rb.MovePosition(rb.position + transform.TransformDirection(movement) * speed * Time.deltaTime);
+
+            GameObject.Find(m_prefixPlayer + "Model").transform.Rotate(0.0f, -Input.GetAxis ("Horizontal") * speed, 0.0f);
         }
     }
 
@@ -165,12 +177,17 @@ public class GravityBody : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "GravityCenter")
+        {
+            audioSource.PlayOneShot(soundImpact);
             m_isEjected = true;
+        }
+           
     }
     void OnTriggerExit(Collider other)
     {
         if (other.tag == "OutOfLimits")
         {
+            audioSource.PlayOneShot(soundDead);
             Debug.Log("youre out");
             m_isEjected = true;
         }
