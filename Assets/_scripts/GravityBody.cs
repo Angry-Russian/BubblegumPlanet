@@ -57,6 +57,7 @@ public class GravityBody : MonoBehaviour {
     private bool isRespawning = false;
     private float jumpCoolDown = 0.0f;
     public Transform animFinalForm;
+    public Image imageDie;
 
     public AudioClip soundJump;
     public AudioClip soundImpact;
@@ -79,6 +80,8 @@ public class GravityBody : MonoBehaviour {
     }
     void Setup()
     {
+        imageDie.enabled = false;
+
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         rb.useGravity = false;
@@ -163,6 +166,8 @@ public class GravityBody : MonoBehaviour {
     }
     IEnumerator respawnPlayer()
     {
+        imageDie.enabled = true;
+
         yield return new WaitForSeconds(2);
 
         this.transform.position = spawn.transform.position;
