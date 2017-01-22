@@ -43,6 +43,9 @@ public class GravityBody : MonoBehaviour {
     CapsuleCollider m_Capsule;
     bool m_Crouching;
 
+    public GameObject spawn;
+    public int deaths = 0;
+
     private Transform m_Cam;                  // A reference to the main camera in the scenes transform
     private Vector3 m_CamForward;             // The current forward direction of the camera
     private Vector3 m_Move;
@@ -50,6 +53,7 @@ public class GravityBody : MonoBehaviour {
     private Vector3 gravityUp;
     private bool m_isEjected = false;
     private bool canMakeImpact = false;
+    private bool isRespawning = false;
     // Use this for initialization
     void Start () {
         // get the transform of the main camera
@@ -63,7 +67,10 @@ public class GravityBody : MonoBehaviour {
                 "Warning: no main camera found. Third person character needs a Camera tagged \"MainCamera\", for camera-relative controls.", gameObject);
             // we use self-relative controls in this case, which probably isn't what the user wants, but hey, we warned them!
         }
-
+        Setup();
+    }
+    void Setup()
+    {
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         rb.useGravity = false;
@@ -78,29 +85,38 @@ public class GravityBody : MonoBehaviour {
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
         m_OrigGroundCheckDistance = m_GroundCheckDistance;
     }
-	public 
-	// Update is called once per frame
-	void FixedUpdate() {
-        if(!m_isEjected)
-            gravityUp = gravityAttraction.Attract(myTransform);
-
-        m_Jump = Input.GetButtonDown(m_prefixPlayer+"Jump");
-        Debug.Log("is "+m_IsGrounded);
-        Debug.Log("jumo " + m_Jump);
-        if (m_IsGrounded && m_Jump)
+    // Update is called once per frame
+    void FixedUpdate() {
+        if((m_isEjected || (Input.GetButton(m_prefixPlayer+"Respawn1") && Input.GetButton(m_prefixPlayer + "Respawn2"))) && !isRespawning)
         {
-            rb.AddForce(gravityUp * m_JumpPower * 30);
-            canMakeImpact = true;
-            m_IsGrounded = false;
-            m_Jump = false;
+            m_isEjected = true;
+            rb.useGravity = true;
+            isRespawning = true;
+            Debug.Log("fsdfsddfsf");
+            StartCoroutine(respawnPlayer());
         }
 
-        float h = Input.GetAxisRaw(m_prefixPlayer+"Horizontal");
-        float v = Input.GetAxisRaw(m_prefixPlayer+"Vertical");
-        
-        Vector3 movement = new Vector3(h, 0.0f, v).normalized;
+        if (!m_isEjected)
+        {
+            gravityUp = gravityAttraction.Attract(myTransform);
+            m_Jump = Input.GetButtonDown(m_prefixPlayer + "Jump");
 
-        rb.MovePosition(rb.position + transform.TransformDirection(movement) * speed * Time.deltaTime);
+            if (m_IsGrounded && m_Jump)
+            {
+                rb.AddForce(gravityUp * m_JumpPower * 30);
+                canMakeImpact = true;
+                m_IsGrounded = false;
+                m_Jump = false;
+                GameObject.FindGameObjectWithTag("planet").GetComponent<WaveBehaviour>().addShockWave(transform.position);
+            }
+
+            float h = Input.GetAxisRaw(m_prefixPlayer + "Horizontal");
+            float v = Input.GetAxisRaw(m_prefixPlayer + "Vertical");
+
+            Vector3 movement = new Vector3(h, 0.0f, v).normalized;
+
+            rb.MovePosition(rb.position + transform.TransformDirection(movement) * speed * Time.deltaTime);
+        }
     }
 
     void UpdateAnimator(Vector3 move)
@@ -143,12 +159,32 @@ public class GravityBody : MonoBehaviour {
     {
         if(other.gameObject.tag == "planet")
         {
-            if (canMakeImpact)
-            {
-                canMakeImpact = false;
-                GameObject.FindGameObjectWithTag("planet").GetComponent<WaveBehaviour>().addShockWave(transform.position);
-            } 
             m_IsGrounded = true;
         }   
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "GravityCenter")
+            m_isEjected = true;
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "OutOfLimits")
+        {
+            Debug.Log("youre out");
+            m_isEjected = true;
+        }
+    }
+    IEnumerator respawnPlayer()
+    {
+        yield return new WaitForSeconds(2);
+
+        this.transform.position = spawn.transform.position;
+        m_isEjected = false;
+        deaths++;
+        isRespawning = false;
+        rb.useGravity = false;
+        rb.velocity = new Vector3(0, 0, 0);
+        Setup();
     }
 }

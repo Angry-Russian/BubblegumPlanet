@@ -152,13 +152,16 @@ public class WaveBehaviour : MonoBehaviour {
         return wobbleVertexSpeeds[vertexIndex];
     }
 
-    public void OnEnterCollision(Collision other)
+    public void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.tag == "Player")
         {
             Vector3 nearestVertexVelocity = getVertexVelocity(NearestVertexTo(other.transform.position));
             Debug.Log(nearestVertexVelocity);
-            other.rigidbody.velocity += nearestVertexVelocity;
+            if(nearestVertexVelocity.magnitude> 0.0004)
+                other.rigidbody.velocity -= nearestVertexVelocity*5;
+            else
+                other.rigidbody.velocity -= nearestVertexVelocity * 50;
         }
     }
 }
