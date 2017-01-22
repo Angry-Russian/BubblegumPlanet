@@ -20,6 +20,11 @@ public class UI_Menu_Controller : MonoBehaviour {
         SceneManager.LoadScene("Dim's little big planets");
     }
 
+    public void loadGame2Player()
+    {
+        SceneManager.LoadScene("Dim's little big planets2Player");
+    }
+
     public void loadMenu()
     {
         SceneManager.LoadScene("UI-Marc");
