@@ -11,3 +11,13 @@ EditorBuildSettings:
     path: Assets/_scenes/UI-Instruction-Marc.unity
   - enabled: 1
     path: Assets/_scenes/UI-Credits-Marc.unity
+  - enabled: 1
+    path: Assets/_scenes/Dim's little big planets.unity
+  - enabled: 1
+    path: Assets/_scenes/WinnerP1.unity
+  - enabled: 1
+    path: Assets/_scenes/WinnerP2.unity
+  - enabled: 1
+    path: Assets/_scenes/WinnerP3.unity
+  - enabled: 1
+    path: Assets/_scenes/WinnerP4.unity
