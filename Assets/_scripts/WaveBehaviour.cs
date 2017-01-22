@@ -70,8 +70,6 @@ public class WaveBehaviour : MonoBehaviour {
             }
         }
 
-
-        wobbleVertices[0] = radius * wobbleVertexAxes[0];
         GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioSource>();
     }
     

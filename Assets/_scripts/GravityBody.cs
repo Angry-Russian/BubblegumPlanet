@@ -103,6 +103,10 @@ public class GravityBody : MonoBehaviour {
     }
     // Update is called once per frame
     void FixedUpdate() {
+
+        if (Time.realtimeSinceStartup < 3) return;
+
+
         if((m_isEjected || (Input.GetButton(m_prefixPlayer+"Respawn1") && Input.GetButton(m_prefixPlayer + "Respawn2"))) && !isRespawning)
         {
             m_isEjected = true;
