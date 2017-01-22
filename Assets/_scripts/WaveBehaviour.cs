@@ -70,7 +70,7 @@ public class WaveBehaviour : MonoBehaviour {
             }
         }
 
-        GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioSource>();
+        audioSource = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioSource>();
     }
     
     // Update is called once per frame
