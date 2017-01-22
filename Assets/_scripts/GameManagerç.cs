@@ -35,23 +35,32 @@ public class GameManagerç : MonoBehaviour {
     {
         yield return new WaitForSeconds(3);
         int[] scores = new int[4];
-        scores[0] = GameObject.Find("Anim_Bot_01").GetComponent<GravityBody>().deaths;
-        scores[1] = GameObject.Find("Anim_Bot_02").GetComponent<GravityBody>().deaths;
-        //scores[2] = GameObject.Find("Anim_Bot_03").GetComponent<GravityBody>().deaths;
-        // scores[3] = GameObject.Find("Anim_Bot_04").GetComponent<GravityBody>().deaths;
+        GameObject p1 = GameObject.Find("Anim_Bot_01");
+        GameObject p2 = GameObject.Find("Anim_Bot_02");
+        GameObject p3 = GameObject.Find("Anim_Bot_03");
+        GameObject p4 = GameObject.Find("Anim_Bot_04");
+
+        if (p1)
+            scores[0] = p1.GetComponent<GravityBody>().deaths;
+        if (p2)
+            scores[1] = p2.GetComponent<GravityBody>().deaths;
+        if (p3)
+            scores[2] = p3.GetComponent<GravityBody>().deaths;
+        if (p4)
+            scores[3] = p4.GetComponent<GravityBody>().deaths;
+
         Array.Sort(scores);
-        if(scores[3] == scores[2])
+        if(scores[0] == scores[1])
         {
             SceneManager.LoadScene("Draw");
         }
         else
         {
-            SceneManager.LoadScene("WinnerP4");
-            if (scores[3] == GameObject.Find("Anim_Bot_04").GetComponent<GravityBody>().deaths)
+            if (scores[0] == p4.GetComponent<GravityBody>().deaths)
                 SceneManager.LoadScene("WinnerP4");
-            else if (scores[3] == GameObject.Find("Anim_Bot_03").GetComponent<GravityBody>().deaths)
+            else if (scores[0] == p3.GetComponent<GravityBody>().deaths)
                 SceneManager.LoadScene("WinnerP3");
-            else if (scores[3] == GameObject.Find("Anim_Bot_02").GetComponent<GravityBody>().deaths)
+            else if (scores[0] == p2.GetComponent<GravityBody>().deaths)
                 SceneManager.LoadScene("WinnerP2");
             else
                 SceneManager.LoadScene("WinnerP1");
