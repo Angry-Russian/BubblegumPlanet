@@ -27,7 +27,8 @@ public class GameManagerç : MonoBehaviour {
         }
         else
         {
-            GetComponent<Text>().text = Mathf.Floor(timeLeft / 60) + ":" + Mathf.RoundToInt(timeLeft % 60);
+            string text = ("00" + Mathf.RoundToInt(timeLeft % 60));
+            GetComponent<Text>().text = Mathf.Floor(timeLeft / 60) + ":" + text.Substring(text.Length-2);
         }
     }
 
