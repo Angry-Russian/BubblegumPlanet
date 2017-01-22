@@ -220,7 +220,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -43}
-  m_SizeDelta: {x: 956, y: 176}
+  m_SizeDelta: {x: 956, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &266425597
 MonoBehaviour:
@@ -254,7 +254,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Jump and try to don't touch the wave!
+  m_Text: 'Jump and try to don''t touch the wave!
+
+
+    Bubblegum planet is a game where four robots try to conquer a planet to show their
+    dominance. The players can make waves to push the other players outside the planet.
+    Each round is three minutes and the player who had the lest death wins.'
 --- !u!222 &266425598
 CanvasRenderer:
   m_ObjectHideFlags: 0
