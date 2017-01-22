@@ -29,7 +29,9 @@ public class WaveBehaviour : MonoBehaviour {
     [Range(0.01f, 6)]
     public float affection = 1f;
 
-    public float frictionImpact = 0.01f;
+    public float initialFriction = 0.01f;
+
+    private bool isFirstTurn = true;
 
     void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
@@ -74,11 +76,14 @@ public class WaveBehaviour : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate () {
         r = radius;
+        //wobbleVertices[0] = (Mathf.Cos(Time.realtimeSinceStartup * frequency) * r * amplitude + r) * wobbleVertexAxes[0];
 
-        wobbleVertices[0] = (Mathf.Cos(Time.realtimeSinceStartup * frequency) * r * amplitude + r) * wobbleVertexAxes[0];
+        float frict = friction;
+        if (Time.timeSinceLevelLoad < 5f) {
+            frict = initialFriction;
+        }
 
-
-        for (var i = 1; i < n; i++) {
+        for (var i = 0; i < n; i++) {
             Vector3 p = wobbleVertices[i];
             Vector3 horizon = p - gravityCenter.position;
             Vector3 f = -k * (horizon.magnitude - r) * wobbleVertexAxes[i]; // starts by going back to its radius
@@ -91,7 +96,7 @@ public class WaveBehaviour : MonoBehaviour {
                 f += partialForce / (n) * affection;
             }
 
-            wobbleVertexAccelerations[i] = f - friction * wobbleVertexSpeeds[i];
+            wobbleVertexAccelerations[i] = f - frict * wobbleVertexSpeeds[i];
             wobbleVertexSpeeds[i] += wobbleVertexAccelerations[i];
             wobbleVertices[i] += wobbleVertexSpeeds[i];
         }
@@ -100,9 +105,6 @@ public class WaveBehaviour : MonoBehaviour {
     }
     public void addShockWave(Vector3 positionImpact)
     {
-        if (friction > 0.2)
-            friction = frictionImpact;
-
         ApplyForceToVertex(NearestVertexTo(positionImpact), -1.0f);
     }
     /// <summary>
