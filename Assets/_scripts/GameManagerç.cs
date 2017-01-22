@@ -51,17 +51,18 @@ public class GameManagerç : MonoBehaviour {
             scores[3] = p4.GetComponent<GravityBody>().deaths;
 
         Array.Sort(scores);
-        if(scores[0] == scores[1])
+        if(scores[0] == scores[1] && scores[1]!=0)
         {
             SceneManager.LoadScene("Draw");
         }
         else
         {
-            if (scores[0] == p4.GetComponent<GravityBody>().deaths)
+            
+            if (p4 && scores[0] == p4.GetComponent<GravityBody>().deaths)
                 SceneManager.LoadScene("WinnerP4");
-            else if (scores[0] == p3.GetComponent<GravityBody>().deaths)
+            else if (p3 && scores[0] == p3.GetComponent<GravityBody>().deaths)
                 SceneManager.LoadScene("WinnerP3");
-            else if (scores[0] == p2.GetComponent<GravityBody>().deaths)
+            else if (p2 && scores[0] == p2.GetComponent<GravityBody>().deaths)
                 SceneManager.LoadScene("WinnerP2");
             else
                 SceneManager.LoadScene("WinnerP1");
