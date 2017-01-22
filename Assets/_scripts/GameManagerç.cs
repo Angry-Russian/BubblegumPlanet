@@ -8,10 +8,13 @@ using UnityEngine.SceneManagement;
 public class GameManagerç : MonoBehaviour {
 
     public float timeLeft = 180.0f;
+    [SerializeField]
+    public GameObject timeout;
     // Use this for initialization
     void Start () {
-		
-	}
+        timeout.active = false;
+
+    }
 
     // Update is called once per frame
     void Update()
@@ -19,6 +22,7 @@ public class GameManagerç : MonoBehaviour {
         timeLeft -= Time.deltaTime;
         if (timeLeft < 0)
         {
+            timeout.active = true;
             StartCoroutine(GameOver());
         }
         else
