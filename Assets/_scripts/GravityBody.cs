@@ -143,25 +143,12 @@ public class GravityBody : MonoBehaviour {
     {
         if(other.gameObject.tag == "planet")
         {
-            Debug.Log("mmmmmm");
             if (canMakeImpact)
             {
-                Debug.Log("Mouhahaha");
                 canMakeImpact = false;
                 GameObject.FindGameObjectWithTag("planet").GetComponent<WaveBehaviour>().addShockWave(transform.position);
             } 
             m_IsGrounded = true;
         }   
-    }
-    void OnCollisionExit(Collision other)
-    {
-        print("No longer in contact with " + other.transform.name);
-        if (other.gameObject.tag == "planet")
-        {
-            Debug.Log("Ohohoh");
-            m_IsGrounded = false;
-            canMakeImpact = true;
-        }
-            
     }
 }

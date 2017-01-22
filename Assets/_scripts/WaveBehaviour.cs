@@ -149,4 +149,14 @@ public class WaveBehaviour : MonoBehaviour {
     public Vector3 getVertexVelocity(int vertexIndex) {
         return wobbleVertexSpeeds[vertexIndex];
     }
+
+    public void OnEnterCollision(Collision other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            Vector3 nearestVertexVelocity = getVertexVelocity(NearestVertexTo(other.transform.position));
+            Debug.Log(nearestVertexVelocity);
+            other.rigidbody.velocity += nearestVertexVelocity;
+        }
+    }
 }
