@@ -55,6 +55,7 @@ public class GravityBody : MonoBehaviour {
     private bool m_isEjected = false;
     private bool canMakeImpact = false;
     private bool isRespawning = false;
+    private float jumpCoolDown = 0.0f;
 
     public AudioClip soundJump;
     public AudioClip soundImpact;
@@ -110,15 +111,19 @@ public class GravityBody : MonoBehaviour {
             gravityUp = gravityAttraction.Attract(myTransform);
             m_Jump = Input.GetButtonDown(m_prefixPlayer + "Jump");
 
-            if (m_IsGrounded && m_Jump)
+            if ((m_IsGrounded && m_Jump) && jumpCoolDown<=0.0f)
             {
-                audioSource.PlayOneShot(soundJump);
-                rb.AddForce(gravityUp * m_JumpPower * 30);
-                canMakeImpact = true;
+                jumpCoolDown = 1.0f;
                 m_IsGrounded = false;
                 m_Jump = false;
+                audioSource.PlayOneShot(soundJump);
+                m_Animator.SetTrigger("Jump");
+                rb.AddForce(gravityUp * m_JumpPower * 30);
+                canMakeImpact = true;               
                 GameObject.FindGameObjectWithTag("planet").GetComponent<WaveBehaviour>().addShockWave(transform.position);
             }
+
+            jumpCoolDown -= Time.deltaTime;
 
             float h = Input.GetAxisRaw(m_prefixPlayer + "Horizontal");
             float v = Input.GetAxisRaw(m_prefixPlayer + "Vertical");
@@ -141,30 +146,6 @@ public class GravityBody : MonoBehaviour {
         if (!m_IsGrounded)
         {
             m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
-        }
-
-        // calculate which leg is behind, so as to leave that leg trailing in the jump animation
-        // (This code is reliant on the specific run cycle offset in our animations,
-        // and assumes one leg passes the other at the normalized clip times of 0.0 and 0.5)
-        float runCycle =
-            Mathf.Repeat(
-                m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime + m_RunCycleLegOffset, 1);
-        float jumpLeg = (runCycle < k_Half ? 1 : -1) * m_ForwardAmount;
-        if (m_IsGrounded)
-        {
-            m_Animator.SetFloat("JumpLeg", jumpLeg);
-        }
-
-        // the anim speed multiplier allows the overall speed of walking/running to be tweaked in the inspector,
-        // which affects the movement speed because of the root motion.
-        if (m_IsGrounded && move.magnitude > 0)
-        {
-            m_Animator.speed = m_AnimSpeedMultiplier;
-        }
-        else
-        {
-            // don't use that while airborne
-            m_Animator.speed = 1;
         }
     }
     void OnCollisionEnter(Collision other)

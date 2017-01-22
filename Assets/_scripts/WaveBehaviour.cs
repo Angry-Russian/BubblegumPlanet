@@ -162,10 +162,10 @@ public class WaveBehaviour : MonoBehaviour {
         {
             Vector3 nearestVertexVelocity = getVertexVelocity(NearestVertexTo(other.transform.position));
             Debug.Log(nearestVertexVelocity);
-            if(nearestVertexVelocity.magnitude> 0.0004)
+            if(Mathf.Abs(nearestVertexVelocity.y)> 0.06)
                 other.rigidbody.velocity -= nearestVertexVelocity*5;
             else
-                other.rigidbody.velocity -= nearestVertexVelocity * 50;
+                other.rigidbody.velocity -= nearestVertexVelocity * 100;
         }
     }
 }

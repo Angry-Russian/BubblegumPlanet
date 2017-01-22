@@ -1,0 +1,304 @@
+fileFormatVersion: 2
+guid: 97901c9d9af74a24392fb1d9f0973907
+timeCreated: 1485067362
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Bras_Droit
+    100004: Bras_Gauche
+    100006: group1
+    100008: group1 1
+    100010: Head
+    100012: Jambe_Droite
+    100014: Jambe_Gauche
+    100016: Kitbash_012
+    100018: Kitbash_012 1
+    100020: Oeil_Gauche
+    100022: Oeil_Gauche1
+    100024: pCube3
+    100026: pCube6
+    100028: pCube6 1
+    100030: pCylinder21
+    100032: pCylinder21 1
+    100034: polySurface15
+    100036: polySurface15 1
+    100038: polySurface18
+    100040: polySurface18 1
+    100042: polySurface34
+    100044: polySurface34 1
+    100046: polySurface36
+    100048: polySurface36 1
+    100050: polySurface41
+    100052: polySurface41 1
+    100054: polySurface45
+    100056: polySurface46
+    100058: polySurface47
+    100060: polySurface48
+    100062: polySurface48 1
+    100064: polySurface50
+    100066: polySurface53
+    100068: polySurface55
+    100070: polySurface55 1
+    100072: polySurface56
+    100074: polySurface56 1
+    100076: polySurface58
+    100078: polySurface58 1
+    100080: polySurface6
+    100082: polySurface6 1
+    100084: polySurface7
+    100086: polySurface7 1
+    100088: pSphere19
+    100090: pSphere19 1
+    100092: pSphere21
+    100094: pSphere7
+    100096: pSphere7 1
+    100098: ROBOT_02_pCylinder17_polySurface44_polySurface49
+    100100: ROBOT_02_pCylinder17_polySurface44_polySurface49 1
+    100102: Roue
+    400000: //RootNode
+    400002: Bras_Droit
+    400004: Bras_Gauche
+    400006: group1
+    400008: group1 1
+    400010: Head
+    400012: Jambe_Droite
+    400014: Jambe_Gauche
+    400016: Kitbash_012
+    400018: Kitbash_012 1
+    400020: Oeil_Gauche
+    400022: Oeil_Gauche1
+    400024: pCube3
+    400026: pCube6
+    400028: pCube6 1
+    400030: pCylinder21
+    400032: pCylinder21 1
+    400034: polySurface15
+    400036: polySurface15 1
+    400038: polySurface18
+    400040: polySurface18 1
+    400042: polySurface34
+    400044: polySurface34 1
+    400046: polySurface36
+    400048: polySurface36 1
+    400050: polySurface41
+    400052: polySurface41 1
+    400054: polySurface45
+    400056: polySurface46
+    400058: polySurface47
+    400060: polySurface48
+    400062: polySurface48 1
+    400064: polySurface50
+    400066: polySurface53
+    400068: polySurface55
+    400070: polySurface55 1
+    400072: polySurface56
+    400074: polySurface56 1
+    400076: polySurface58
+    400078: polySurface58 1
+    400080: polySurface6
+    400082: polySurface6 1
+    400084: polySurface7
+    400086: polySurface7 1
+    400088: pSphere19
+    400090: pSphere19 1
+    400092: pSphere21
+    400094: pSphere7
+    400096: pSphere7 1
+    400098: ROBOT_02_pCylinder17_polySurface44_polySurface49
+    400100: ROBOT_02_pCylinder17_polySurface44_polySurface49 1
+    400102: Roue
+    2300000: Kitbash_012
+    2300002: Kitbash_012 1
+    2300004: pCube3
+    2300006: pCube6
+    2300008: pCube6 1
+    2300010: pCylinder21
+    2300012: pCylinder21 1
+    2300014: polySurface15
+    2300016: polySurface15 1
+    2300018: polySurface18
+    2300020: polySurface18 1
+    2300022: polySurface34
+    2300024: polySurface34 1
+    2300026: polySurface36
+    2300028: polySurface36 1
+    2300030: polySurface41
+    2300032: polySurface41 1
+    2300034: polySurface45
+    2300036: polySurface46
+    2300038: polySurface47
+    2300040: polySurface48
+    2300042: polySurface48 1
+    2300044: polySurface50
+    2300046: polySurface53
+    2300048: polySurface55
+    2300050: polySurface55 1
+    2300052: polySurface56
+    2300054: polySurface56 1
+    2300056: polySurface58
+    2300058: polySurface58 1
+    2300060: polySurface6
+    2300062: polySurface6 1
+    2300064: polySurface7
+    2300066: polySurface7 1
+    2300068: pSphere19
+    2300070: pSphere19 1
+    2300072: pSphere21
+    2300074: pSphere7
+    2300076: pSphere7 1
+    2300078: ROBOT_02_pCylinder17_polySurface44_polySurface49
+    2300080: ROBOT_02_pCylinder17_polySurface44_polySurface49 1
+    3300000: Kitbash_012
+    3300002: Kitbash_012 1
+    3300004: pCube3
+    3300006: pCube6
+    3300008: pCube6 1
+    3300010: pCylinder21
+    3300012: pCylinder21 1
+    3300014: polySurface15
+    3300016: polySurface15 1
+    3300018: polySurface18
+    3300020: polySurface18 1
+    3300022: polySurface34
+    3300024: polySurface34 1
+    3300026: polySurface36
+    3300028: polySurface36 1
+    3300030: polySurface41
+    3300032: polySurface41 1
+    3300034: polySurface45
+    3300036: polySurface46
+    3300038: polySurface47
+    3300040: polySurface48
+    3300042: polySurface48 1
+    3300044: polySurface50
+    3300046: polySurface53
+    3300048: polySurface55
+    3300050: polySurface55 1
+    3300052: polySurface56
+    3300054: polySurface56 1
+    3300056: polySurface58
+    3300058: polySurface58 1
+    3300060: polySurface6
+    3300062: polySurface6 1
+    3300064: polySurface7
+    3300066: polySurface7 1
+    3300068: pSphere19
+    3300070: pSphere19 1
+    3300072: pSphere21
+    3300074: pSphere7
+    3300076: pSphere7 1
+    3300078: ROBOT_02_pCylinder17_polySurface44_polySurface49
+    3300080: ROBOT_02_pCylinder17_polySurface44_polySurface49 1
+    4300000: polySurface7
+    4300002: polySurface6
+    4300004: pSphere7
+    4300006: polySurface55
+    4300008: polySurface56
+    4300010: pSphere19
+    4300012: polySurface7
+    4300014: polySurface6
+    4300016: pSphere7
+    4300018: polySurface55
+    4300020: polySurface56
+    4300022: pSphere19
+    4300024: pSphere21
+    4300026: pCube3
+    4300028: polySurface46
+    4300030: polySurface47
+    4300032: polySurface50
+    4300034: polySurface53
+    4300036: polySurface45
+    4300038: ROBOT_02_pCylinder17_polySurface44_polySurface49
+    4300040: polySurface15
+    4300042: polySurface18
+    4300044: polySurface48
+    4300046: polySurface58
+    4300048: ROBOT_02_pCylinder17_polySurface44_polySurface49
+    4300050: polySurface15
+    4300052: polySurface18
+    4300054: polySurface48
+    4300056: polySurface58
+    4300058: pCylinder21
+    4300060: pCube6
+    4300062: polySurface36
+    4300064: polySurface41
+    4300066: Kitbash_012
+    4300068: polySurface34
+    4300070: pCylinder21
+    4300072: pCube6
+    4300074: polySurface36
+    4300076: polySurface41
+    4300078: Kitbash_012
+    4300080: polySurface34
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
